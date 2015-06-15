@@ -35,7 +35,7 @@ $(function() {
 		
 				it('has a URL that is not empty', function() {
 					for (var i = 0; i < allFeeds.length; i++){
-					console.log(allFeeds[i].url);
+//					console.log(allFeeds[i].url);
 					expect(allFeeds[i].url).toBeDefined();
 					expect(allFeeds[i].url).not.toBe(0);
 				};	
@@ -51,7 +51,7 @@ $(function() {
 		
 				it('has a Name that is not empty', function() {
 					for (var i = 0; i < allFeeds.length; i++){
-					console.log(allFeeds[i].name);
+//					console.log(allFeeds[i].name);
 					expect(allFeeds[i].name).toBeDefined();
 					expect(allFeeds[i].name).not.toBe(0);
 				};	
@@ -66,37 +66,37 @@ $(function() {
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
-describe('The menu', function(){
-	
-	it('is hidden by default', function(){
-		expect($('body').hasClass('menu-hidden')).toBe(true);
-	});
-	// here is another way...which is best?
-	it('is left of viewport by default', function(){
-		console.log('transform is',($('div.menu').position().left));
-		expect($('div.menu').position().left).toBeLessThan(0);
-	});	
-	
-	
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
-		var initialState = ($('body').hasClass('menu-hidden'));
-	
-	it('appears when clicked', function(){
-		$('a.menu-icon-link').click();
-		expect($('body').hasClass('menu-hidden') !== initialState).toBe(true);
+	describe('The menu', function(){
 		
-	});
+		it('is hidden by default', function(){
+			expect($('body').hasClass('menu-hidden')).toBe(true);
+		});
+		// here is another way...which is best?
+		it('is left of viewport by default', function(){
+//			console.log('transform is',($('div.menu').position().left));
+			expect($('div.menu').position().left).toBeLessThan(0);
+		});	
+		
+		
+	         /* TODO: Write a test that ensures the menu changes
+	          * visibility when the menu icon is clicked. This test
+	          * should have two expectations: does the menu display when
+	          * clicked and does it hide when clicked again.
+	          */
+			var initialState = ($('body').hasClass('menu-hidden'));
+		
+		it('appears when clicked', function(){
+			$('a.menu-icon-link').click();
+			expect($('body').hasClass('menu-hidden') !== initialState).toBe(true);
+			
+		});
+		
+		it('hides when clicked again', function(){
+			$('a.menu-icon-link').click();
+			expect($('body').hasClass('menu-hidden') === initialState).toBe(true);
 	
-	it('hides when clicked again', function(){
-		$('a.menu-icon-link').click();
-		expect($('body').hasClass('menu-hidden') === initialState).toBe(true);
-
-	});	
-});
+		});	
+	});
 	
     /* TODO: Write a new test suite named "Initial Entries" */
 
@@ -106,14 +106,71 @@ describe('The menu', function(){
          * Remember, loadFeed() is asynchronous so this test wil require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        
+	describe('Initial Entries', function(){
+//	for (var i = 0; i < allFeeds.length; i++){	
+	var i = 0;
+//	totalFeeds = allFeeds.length;
+	
+		beforeEach(function(done) {
+			
+			loadFeed(i,(function() {
+			done();
+			}));
+		});
+		
+		it('feed '+i+' puts an entry in the feed container', function(done){
+			console.log('testing the test:  feed id is', i, 'entry is ', $('div.feed a.entry-link article.entry'));
+			expect($('div.feed a.entry-link article.entry').length).toBeGreaterThan(0);
+			done();
+		});
+	});
+	
+	/*Loops through each feed to test that it creates an entry in the feed container
+	 * Does not work because it does whatever it wants in any order with complete disregard
+	 * for whatever order I tell it to use, so it it measuring stuff, then defining it. :-((((((()))))))*/
+	    
+/*	describe('All Initial Entries', function(){
 
+// loads each feed, building an array containing the number of entries for for each feed
+	var allLengths = [];
+	function getEntries(allFeeds){
+		
+		for (var i = 0; i < allFeeds.length; i++){
+			loadFeed(i, function(){
+				var myarray = $('div.feed a.entry-link article.entry');
+				console.log('myarray length ', myarray.length);
+			//	console.log('div.feed a.entry-link article.entry legnth',$('div.feed a.entry-link article.entry').legnth);
+				allLengths.push(myarray.length);
+				console.log('all Legnths in here',allLengths);
+			//	console.log('div.feed a.entry-link article.entry',$('div.feed a.entry-link article.entry'));
+			}
+		);}
+	} //end getEntries, expect allLengths === [4, 4, 4, 4]
+	
+	//var allEntries = getEntries(allFeeds);
+	
+		beforeEach(function(done) {
+			getEntries(allFeeds);
+			console.log('allLengths out here', allLengths);
+			done();
+		});
+	
+	function testAlltheFeeds(index, numEntries){	
+		it('feed '+i+' puts an entry in the feed container', function(done){
+			console.log('testing the test: index is ', index, 'numEntries is ', numEntries);
+			expect(numEntries.length).toBeGreaterThan(0);
+			done();
+		});
+	} //end testAlltheFeeds
+	for (var i = 0; i < allFeeds.length; i++){
+//		console.log('wtf --  allEntries[i]', allEntries[i]);
+		testAlltheFeeds(i, allLengths[i]);
+	}
+//	}
+	}); 
 
-      
+  */    
          
-}()); // goes at end of file
-
-
 
     /* TODO: Write a new test suite named "New Feed Selection"
 
@@ -121,4 +178,30 @@ describe('The menu', function(){
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-//}()); moved up
+        
+	describe('New Feed Selection', function(){
+		
+		var i = 1;
+		var originalEntry;
+		var nextEntry;
+		beforeEach(function(done){
+			originalEntry = $('div.feed a.entry-link article.entry');
+		//	console.log('original entry in here', originalEntry);
+			loadFeed(i,function(){
+				nextEntry = $('div.feed a.entry-link article.entry');
+			//	console.log('next entry in here', nextEntry);
+				done();
+			
+			});
+		});
+		
+		it ('should change the entry when a new feed is loaded', function(done){
+			console.log('original entry out here', originalEntry);
+			console.log('next entry out here', nextEntry);
+			//expect((nextEntry).not.toBe(originalEntry));
+			expect(nextEntry).not.toBe(originalEntry);
+			//expect(false).not.toBe(true);
+			done();
+		});
+	});
+}()); // goes at end of file
