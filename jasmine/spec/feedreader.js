@@ -38,42 +38,41 @@ $(function() {
 //					console.log(allFeeds[i].url);
 					expect(allFeeds[i].url).toBeDefined();
 					expect(allFeeds[i].url).not.toBe(0);
-				};	
+				}	
 				});
 				
+		/* TODO: Write a test that loops through each feed
+		* in the allFeeds object and ensures it has a name defined
+		* and that the name is not empty.
+		*/
 
-			
-			        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
-         */
-
-		
 				it('has a Name that is not empty', function() {
 					for (var i = 0; i < allFeeds.length; i++){
 //					console.log(allFeeds[i].name);
 					expect(allFeeds[i].name).toBeDefined();
 					expect(allFeeds[i].name).not.toBe(0);
-				};	
+				}	
 				});
 			});				
 			
-
     /* TODO: Write a new test suite named "The menu" */
 
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
+         * There is a css tag on the body called menu-hidden.  When it exists,
+         * divs with class = menu are positioned to the left of the viewport
          */
 	describe('The menu', function(){
 		
 		it('is hidden by default', function(){
 			expect($('body').hasClass('menu-hidden')).toBe(true);
 		});
+		
 		// here is another way...which is best?
 		it('is left of viewport by default', function(){
-//			console.log('transform is',($('div.menu').position().left));
+//			console.log('transform is',($('div.menu').position().left)); <-- use that to see where the menu hides
 			expect($('div.menu').position().left).toBeLessThan(0);
 		});	
 		
@@ -83,18 +82,16 @@ $(function() {
 	          * should have two expectations: does the menu display when
 	          * clicked and does it hide when clicked again.
 	          */
-			var initialState = ($('body').hasClass('menu-hidden'));
+		var initialState = ($('body').hasClass('menu-hidden')); //true or false depending on menu status
 		
 		it('appears when clicked', function(){
 			$('a.menu-icon-link').click();
 			expect($('body').hasClass('menu-hidden') !== initialState).toBe(true);
-			
 		});
 		
 		it('hides when clicked again', function(){
 			$('a.menu-icon-link').click();
 			expect($('body').hasClass('menu-hidden') === initialState).toBe(true);
-	
 		});	
 	});
 	
@@ -107,14 +104,12 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
 	describe('Initial Entries', function(){
-//	for (var i = 0; i < allFeeds.length; i++){	
-	var i = 0;
-//	totalFeeds = allFeeds.length;
+
+		var i = 0; //specifies the Udacity Feed
 	
 		beforeEach(function(done) {
-			
 			loadFeed(i,(function() {
-			done();
+				done();
 			}));
 		});
 		
@@ -181,27 +176,23 @@ $(function() {
         
 	describe('New Feed Selection', function(){
 		
-		var i = 1;
+		var i = 1; //specifies the CSS Tricks Feed, Udacity Feed was originally on the page
 		var originalEntry;
 		var nextEntry;
 		beforeEach(function(done){
 			originalEntry = $('div.feed a.entry-link article.entry');
-		//	console.log('original entry in here', originalEntry);
 			loadFeed(i,function(){
 				nextEntry = $('div.feed a.entry-link article.entry');
-			//	console.log('next entry in here', nextEntry);
 				done();
 			
 			});
 		});
 		
 		it ('should change the entry when a new feed is loaded', function(done){
-			console.log('original entry out here', originalEntry);
-			console.log('next entry out here', nextEntry);
-			//expect((nextEntry).not.toBe(originalEntry));
+			//console.log('original entry out here', originalEntry); -->if test really works
+			//console.log('next entry out here', nextEntry);         ---> these items are not the same
 			expect(nextEntry).not.toBe(originalEntry);
-			//expect(false).not.toBe(true);
 			done();
 		});
 	});
-}()); // goes at end of file
+}()); 
