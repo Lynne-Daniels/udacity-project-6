@@ -1,9 +1,11 @@
 This application is Project 6 in Udacity's Front End Web Development Nanodegree Curriculum.
-June 2015.  Most of the code in feedreader.js is mine.  All other content provided by Udacity.
 
-To run, download all files into the same directoy, and open index.html.  Scroll to the bottom of the page to see the Jasmine test results.
+Most of the code in feedreader.js is mine. All other content provided by Udacity.
 
-Below, find Udacity's assingment details:
+To run, download all files into the same directory, and open index.html. Scroll to the bottom of the page to see the Jasmine test results.
+
+Below, find Udacity's assignment details:
+
 
 # Project Overview
 
