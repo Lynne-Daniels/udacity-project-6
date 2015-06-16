@@ -1,3 +1,10 @@
+This application is Project 6 in Udacity's Front End Web Development Nanodegree Curriculum.
+June 2015.  Most of the code in feedreader.js is mine.  All other content provided by Udacity.
+
+To run, download all files into the same directoy, and open index.html.  Scroll to the bottom of the page to see the Jasmine test results.
+
+Below, find Udacity's assingment details:
+
 # Project Overview
 
 In this project you are given a web-based application that reads RSS feeds. The original developer of this application clearly saw the value in testing, they've already included [Jasmine](http://jasmine.github.io/) and even started writing their first test suite! Unfortunately, they decided to move on to start their own company and we're now left with an application with an incomplete test suite. That's where you come in.

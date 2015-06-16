@@ -114,7 +114,7 @@ $(function() {
 		});
 		
 		it('feed '+i+' puts an entry in the feed container', function(done){
-			console.log('testing the test:  feed id is', i, 'entry is ', $('div.feed a.entry-link article.entry'));
+//			console.log('testing the test:  feed id is', i, 'entry is ', $('div.feed a.entry-link article.entry'));
 			expect($('div.feed a.entry-link article.entry').length).toBeGreaterThan(0);
 			done();
 		});
@@ -128,7 +128,7 @@ $(function() {
 
 // loads each feed, building an array containing the number of entries for for each feed
 	var allLengths = [];
-	function getEntries(allFeeds){
+	function getEntries(allFeeds, cb){
 		
 		for (var i = 0; i < allFeeds.length; i++){
 			loadFeed(i, function(){
@@ -140,14 +140,20 @@ $(function() {
 			//	console.log('div.feed a.entry-link article.entry',$('div.feed a.entry-link article.entry'));
 			}
 		);}
+		cb();
 	} //end getEntries, expect allLengths === [4, 4, 4, 4]
 	
 	//var allEntries = getEntries(allFeeds);
+	getEntries(allFeeds, cb);
+	function cb()
+		{console.log('allLengths way out here', allLengths);}
 	
+		
 		beforeEach(function(done) {
 			getEntries(allFeeds);
-			console.log('allLengths out here', allLengths);
 			done();
+			console.log('allLengths out here', allLengths);
+			
 		});
 	
 	function testAlltheFeeds(index, numEntries){	
