@@ -4,7 +4,7 @@ Most of the code in feedreader.js is mine. All other content provided by Udacity
 
 To run, download all files into the same directory, and open index.html. Scroll to the bottom of the page to see the Jasmine test results.
 
-Below, find Udacity's assignment details:
+Below are Udacity's assignment details.  The feedreader.js file follows the directions below. On Item 10, there are two tests for the menu visibility.  One tests the presence/absence of the class that hides the menu. The second tests the actual position of the menu.
 
 
 # Project Overview
