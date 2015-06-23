@@ -15,7 +15,7 @@ $(function() {
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
-        });
+		});
 	});
 
 	/* Loops through each feed in the allFeeds object and ensures
