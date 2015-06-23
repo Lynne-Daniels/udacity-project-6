@@ -8,8 +8,8 @@ $(function() {
 	/* Test RSS feeds definitions and the allFeeds variable */
 	describe('RSS Feeds', function() {
 		/* Test to make sure that the allFeeds variable has been
-		 defined and that it is not been defined and that it is not
-		 empty. */
+		defined and that it is not been defined and that it is not
+		empty. */
 
 		it('are defined', function() {
 			expect(allFeeds).toBeDefined();
