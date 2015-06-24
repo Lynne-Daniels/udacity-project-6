@@ -1,9 +1,11 @@
 /* feedreader.js
- *For use with Jasmine  -- see http://jasmine.github.io/2.2/introduction.html
- *Jasmine will use the tests in this file to determine if certain
- * item in app.js are functioning as expected.*/
-/* Use $() to prevent running tests until after DOM is ready. */
-$(function() {
+For use with Jasmine  -- see http://jasmine.github.io/2.2/introduction.html
+Jasmine will use the tests in this file to determine if certain
+item in app.js are functioning as expected.*/
+
+/*Use $() to prevent running tests until after DOM is ready.*/
+
+$(function(){
 
 	/* Test RSS feeds definitions and the allFeeds variable */
 	describe('RSS Feeds', function() {
@@ -42,8 +44,8 @@ $(function() {
 	});
 
 	/* Test that the menu is hidden by default
-         There is a css tag on the body called menu-hidden.  When it exists,
-         divs with class = menu are positioned to the left of the viewport*/
+	There is a css tag on the body called menu-hidden.  When it exists,
+	divs with class = menu are positioned to the left of the viewport*/
 
 	describe('The menu', function() {
 
@@ -60,7 +62,7 @@ $(function() {
 		});
 
 		/* Tests that the menu changes visibility when the menu icon is 
-	            clicked.*/
+		clicked.*/
 
 		var initialState = ($('body').hasClass('menu-hidden')); //true or false depending on menu status
 
@@ -76,8 +78,8 @@ $(function() {
 	});
 
 	/* Test that when the asynchronous function loadFeed
-	 * is called and completes its work, there is at least
-	 * a single .entry element within the .feed container.*/
+	is called and completes its work, there is at least
+	a single .entry element within the .feed container.*/
 
 	describe('Initial Entries', function() {
 
