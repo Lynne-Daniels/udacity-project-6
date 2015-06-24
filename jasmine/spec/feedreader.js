@@ -25,7 +25,7 @@ $(function() {
 		it('has a URL that is not empty', function() {
 			for (var i = 0; i < allFeeds.length; i++) {
 				expect(allFeeds[i].url).toBeDefined();
-				expect(allFeeds[i].url).not.toBe(0);
+				expect(allFeeds[i].url.length).toBeGreaterThan(2);
 			}
 		});
 
@@ -33,10 +33,11 @@ $(function() {
 		  it has a name defined and that the name is not empty.*/
 
 		it('has a Name that is not empty', function() {
-			for (var i = 0; i < allFeeds.length; i++) {
-				expect(allFeeds[i].name).toBeDefined();
-				expect(allFeeds[i].name).not.toBe(0);
-			}
+
+			allFeeds.forEach(function(feed){
+				expect(feed.name).toBeDefined();
+				expect(feed.name.length).toBeGreaterThan(0);
+			});
 		});
 	});
 
@@ -99,20 +100,20 @@ $(function() {
 
 	describe('New Feed Selection', function() {
 
-		var i = 1; //specifies the CSS Tricks Feed, Udacity Feed was originally on the page
-		var originalEntry;
+		var originalEntry = '';
 		var nextEntry;
 		beforeEach(function(done) {
-			originalEntry = $('div.feed a.entry-link article.entry');
-			loadFeed(i, function() {
-				nextEntry = $('div.feed a.entry-link article.entry');
-				done();
-
+			$('div.feed a.entry-link article.entry').empty();//clear the original feed
+			loadFeed(0, function() {			
+				originalEntry = $('div.feed a.entry-link article.entry');
+				loadFeed(1, function() {
+					nextEntry = $('div.feed a.entry-link article.entry');
+					done();
+				});
 			});
 		});
-
 		it('should change the entry when a new feed is loaded', function(done) {
-			expect(nextEntry).not.toBe(originalEntry);
+			expect(nextEntry[0].innerHTML).not.toBe(originalEntry[0].innerHTML);
 			done();
 		});
 	});
